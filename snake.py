@@ -1,66 +1,28 @@
-from random import random
-import sys
-import tkinter as tk
+from turtle import Screen, Turtle
 
-window = tk.Tk()
-
-window_dimensions = [800, 800]
-window.geometry(str(window_dimensions[0]) + "x" + str(window_dimensions[1]))
-window.resizable(0, 0)
-window.after_cancel
-
-window.title("Snake over 9000 turbo'")
-
-window.protocol("WM_DELETE_WINDOW", sys.exit)
-
-frames_per_second = 12
-
-game_canvas = tk.Canvas(window,
-                        width=window_dimensions[0],
-                        height=window_dimensions[1],
-                        bd=0,
-                        highlightthickness=0)
-
-game_canvas.pack()
-
-game_scale = 25
-game_dimensions = [window_dimensions[0] / game_scale,
-                   window_dimensions[1] / game_scale]
-
-
-class Screen:
-    # size
-    # walls
-    # possible_obstacles created as random non walkable walls
-    #   this is possible with random creation and not repeating
-    #   the last movement, (right right, down)
-    pass
-
-
-class input:
-    # this can be created as just funcs
-    pass
+STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
+MOVE_DISTANCE = 20
 
 
 class Snake:
-    # spawn position
-    # body
-    # head
-    # movement
-    pass
 
+    def __init__(self):
+        self.initial_segments = []
+        self.create_snake()
+        self.movement()
 
-def create_booster():
-    # spawn position
-    spawn_position = [random.randit(0, window_dimensions[0]-1), 
-                      random.randint(0, window_dimensions[1]-1)]
-    # need to check if it's spawning in the actual snake
-    # size
-    # power_up
-    return spawn_position
-
-
-class App(tk.Frame):
-    def __init__(self, master=None):
-        super().__init__(master)
-        self.pack
+    def create_snake(self):
+        for position in STARTING_POSITIONS:
+            new_segment = Turtle('square')
+            new_segment.color('white')
+            new_segment.penup()
+            new_segment.goto(position)
+            self.initial_segments.append(new_segment)
+    
+    def movement(self):
+        for seg_num in range(len(self.initial_segments)-1, 0, -1):
+            new_x = self.initial_segments[seg_num-1].xcor()
+            new_y = self.initial_segments[seg_num-1].ycor()
+            self.initial_segments[seg_num].goto(new_x, new_y)
+        
+        self.initial_segments[0].forward(MOVE_DISTANCE)
