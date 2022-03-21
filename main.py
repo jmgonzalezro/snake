@@ -16,3 +16,4 @@ while game_is_on:
     screen.update()
     time.sleep(1)
     
+    snake.movement()
