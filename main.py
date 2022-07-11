@@ -1,5 +1,6 @@
 from turtle import Turtle, Screen
 from snake import Snake
+from food import Food
 import time
 
 screen = Screen()
@@ -9,6 +10,7 @@ screen.tracer(0)
 screen.title('SNAKE GAME 3000')
 
 snake = Snake()
+food = Food()
 
 game_is_on = True
 
